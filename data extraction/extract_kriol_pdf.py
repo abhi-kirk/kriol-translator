@@ -4,13 +4,17 @@ import json
 from tqdm import tqdm
 from PyPDF2 import PdfReader
 
-base_path = "/Users/abhi/Documents/projects/translator/experiments/kriol-data/"
+from common import BASE_DIR, DATA_DIR
+
+raw_data_path = os.path.join(DATA_DIR, "raw")
 filename = "BelizeKriol_EngDic_49337_2009.pdf"
 
-filepath = os.path.join(base_path, filename)
+output_path = os.path.join(DATA_DIR, "eng-kriol-pairs")
+
+filepath = os.path.join(raw_data_path, filename)
 reader = PdfReader(filepath)
 
-with open(os.path.join(base_path, "pos.json"), "r", encoding="utf-8") as fh:
+with open(os.path.join(DATA_DIR, "pos.json"), "r", encoding="utf-8") as fh:
     POS = json.load(fh)
 
 
@@ -80,5 +84,5 @@ if __name__ == "__main__":
 
     print("Number of Eng-Kriol pairs:", len(eng_kriol_data))
 
-    with open(os.path.join(base_path, "kriol_eng_pairs_dict.json"), "w") as fh:
+    with open(os.path.join(output_path, "kriol_eng_pairs_dict.json"), "w") as fh:
         json.dump(eng_kriol_data, fh, ensure_ascii=False)

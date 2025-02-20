@@ -1,7 +1,9 @@
 import os
 import json
 
-data_dir = "/Users/abhi/Documents/projects/translator/experiments/kriol-data"
+from common import DATA_DIR
+
+data_dir = os.path.join(DATA_DIR, "eng-kriol-pairs")
 
 
 def get_stats(path):

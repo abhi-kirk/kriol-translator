@@ -4,11 +4,14 @@ from tqdm import tqdm
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+from common import BASE_DIR, DATA_DIR
+
 base_url = "https://live.bible.is/bible"
 kriol_bible, eng_bible = "BZJBSW", "ENGWEB"
 
-base_path = "/Users/abhi/Documents/projects/translator/experiments/kriol-data/"
-with open(os.path.join(base_path, "bible_authors_dict.json"), "r", encoding="utf-8") as fh:
+output_path = os.path.join(DATA_DIR, "eng-kriol-pairs")
+
+with open(os.path.join(DATA_DIR, "bible_authors.json"), "r", encoding="utf-8") as fh:
     AUTHORS = json.load(fh)
 
 op = webdriver.ChromeOptions()
@@ -75,5 +78,5 @@ if __name__ == "__main__":
 
     print("Number of Eng-Kriol pairs:", len(eng_kriol_data))
 
-    with open(os.path.join(base_path, "kriol_eng_pairs_bible.json"), "w") as fh:
+    with open(os.path.join(output_path, "kriol_eng_pairs_bible.json"), "w") as fh:
         json.dump(eng_kriol_data, fh, ensure_ascii=False)
